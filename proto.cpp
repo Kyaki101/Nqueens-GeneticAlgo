@@ -28,7 +28,7 @@ mat nextGen;
 
 //Compares for ordering
 bool comp(individual & a, individual & b){
-    return a.score > b.score;
+    return a.score < b.score;
 }
 
 void mutate(individual & child, int index){
@@ -136,8 +136,7 @@ int main(){
         generational(storage[i]);
         genScore(storage[i]);
     }
-    int gens = 1000;
-    std::uniform_int_distribution<int> pickTop(0, popu - 2);
+    std::uniform_int_distribution<int> pickTop(0, popu / 2);
     individual best = storage[findBest()];
     if(k) {std::cout << "GEN " << 0 << '\n'; printDna(best);}
     int g = 0;
@@ -166,7 +165,7 @@ int main(){
             std::cout << "gen: " << g << '\n';
             break;
         }
-        else if(repeated >= n * n * n){
+        else if(repeated >= n * n){
             std::cout << "Forced Result: \n";
             printDna(best);
             std::cout << "gen: " << g << '\n';
